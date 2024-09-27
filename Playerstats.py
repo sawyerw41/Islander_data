@@ -23,9 +23,11 @@ def find_situation():
     while True:
         situation =input('\nWhat situation do you want to see stats for? \nType "info" for what types ')
         if situation == "info":
+            #gives you the type of situations you can look for and re prompts you
             print("\nall","5on5",'4on5','5on4','other',sep="\n")
             situation =input('What situation do you want to see stats for? ')
         if situation != 'all' and (situation != '5on5') and (situation != '4on5') and (situation !='5on4') and (situation !='other'):
+            #apears if you didnt put a valid input and starts the prompt over in order to prevent breaks
             print('You didnt enter in a valid situation please try again or press info to see your opions')
             situation == ""
         else:
@@ -35,7 +37,7 @@ def find_situation():
 
 
 def main():
-    #season = int(input("What season Stats do you want to see? "))
+    season = int(input("What season Stats do you want to see? "))
     situations = find_situation()
     print(situations)
      
