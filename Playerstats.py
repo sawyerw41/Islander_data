@@ -35,8 +35,13 @@ def find_situation():
             break
 
 
+def find_player():
+    player_name = input('Enter a players name or type "player list" to get ')
+
+
 
 def main():
+    Player_name = "Enter players name"
     season = int(input("What season Stats do you want to see? "))
     situations = find_situation()
     print(situations)
@@ -46,6 +51,6 @@ def main():
     
 
 
-   # print_lines("./data/8478445.csv")
+   # print_lines("barzal.csv")
 
 main()
