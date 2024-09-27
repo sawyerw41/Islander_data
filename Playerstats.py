@@ -1,3 +1,4 @@
+lastnames = r'data\lastnames.txt'
 
 
 
@@ -15,6 +16,13 @@ def print_lines_last(file_name):
             
             print(line)
 
+def convert_name_into_file(playername):
+    
+    player_file_name = ""
+    txt = r"data\{price}.csv"
+    player_file_name = (txt.format(price = playername))
+    
+    return player_file_name
 
 
 
@@ -45,8 +53,18 @@ def find_situation():
 def find_player():
     
     while True:
-        player_name = input('Enter a players last name or type "player list" to get: ')
+        
+        
+        
+        player_name = input('Enter a players last name or type "player list" to get a list of names: ')
+        if player_name == 'player list':
+            print_lines_last(lastnames)
+            continue
+
+        
+        
         is_player = player_search(player_name)
+
         
         
         if is_player == True:
@@ -67,9 +85,9 @@ def find_player():
 
 def player_search(player_name):
    
-    with open('data\lastnames.txt') as my_file:
+    with open(r'data\lastnames.txt') as my_file:
         word = player_name
-        my_file = open('data\lastnames.txt')
+        
         player_found = False
         for line in my_file:
             stripped_line = line.strip()
@@ -87,17 +105,18 @@ def player_search(player_name):
 
 
 def main():
-    #Player_name = find_player()
-   # season = int(input("What season Stats do you want to see? "))
+    Player_name = find_player()
+    #season = int(input("What season Stats do you want to see? "))
     #situations = find_situation()
-    #print(situations)
-    print(find_player())
+    player_file = convert_name_into_file(Player_name)
+    
+   
      
         
 
     
 
 
-    #print_lines_last('data\lastnames.txt')
+    print_lines_last(player_file)
 
 main()
