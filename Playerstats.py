@@ -8,6 +8,13 @@ def print_lines(file_name):
             tokens = line.split(',')
             print(tokens[1],tokens[2])
 
+def print_lines_last(file_name):
+    with open(file_name) as my_file:
+       
+        for line in my_file:
+            
+            print(line)
+
 
 
 
@@ -36,21 +43,54 @@ def find_situation():
 
 
 def find_player():
-    player_name = input('Enter a players name or type "player list" to get ')
+    
+    while True:
+        player_name = input('Enter a players last name or type "player list" to get ')
+        is_player = player_search(player_name)
+        if is_player == True:
+            print("yes player")
+            break
+        else:
+            print("try again")
+
+
+        
+
+
+
+
+
+
+
+def player_search(player_name):
+    word = player_name
+    my_file = open('./data/lastnames.txt')
+    player_found = False
+    for line in my_file:
+        stripped_line = line.strip()
+        if stripped_line.lower() == word.lower():
+            my_file.close()
+            player_found = True
+    return player_found        
+    
+    my_file.close()
+    
+
+
 
 
 
 def main():
-    Player_name = "Enter players name"
-    season = int(input("What season Stats do you want to see? "))
-    situations = find_situation()
-    print(situations)
+    #Player_name = find_player()
+   # season = int(input("What season Stats do you want to see? "))
+    #situations = find_situation()
+    #print(situations)
      
         
 
     
 
 
-   # print_lines("barzal.csv")
+    print_lines_last('data\players.txt')
 
 main()
