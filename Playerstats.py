@@ -45,11 +45,14 @@ def find_situation():
 def find_player():
     
     while True:
-        player_name = input('Enter a players last name or type "player list" to get ')
+        player_name = input('Enter a players last name or type "player list" to get: ')
         is_player = player_search(player_name)
+        
+        
         if is_player == True:
-            print("yes player")
+            return player_name
             break
+        
         else:
             print("try again")
 
@@ -63,17 +66,20 @@ def find_player():
 
 
 def player_search(player_name):
-    word = player_name
-    my_file = open('./data/lastnames.txt')
-    player_found = False
-    for line in my_file:
-        stripped_line = line.strip()
-        if stripped_line.lower() == word.lower():
-            my_file.close()
-            player_found = True
-    return player_found        
+   
+    with open('data\lastnames.txt') as my_file:
+        word = player_name
+        my_file = open('data\lastnames.txt')
+        player_found = False
+        for line in my_file:
+            stripped_line = line.strip()
+            if stripped_line.lower() == word.lower():
+            
+                player_found = True
+
+        return player_found        
     
-    my_file.close()
+  
     
 
 
@@ -85,12 +91,13 @@ def main():
    # season = int(input("What season Stats do you want to see? "))
     #situations = find_situation()
     #print(situations)
+    print(find_player())
      
         
 
     
 
 
-    print_lines_last('data\players.txt')
+    #print_lines_last('data\lastnames.txt')
 
 main()
