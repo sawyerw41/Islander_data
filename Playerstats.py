@@ -100,16 +100,27 @@ def player_search(player_name):
   
     
 
+def find_season(file,situation,season):
+    with open(file) as my_file:
+        for line in my_file:
+            splitline = line.split(",")
+            
+            if ((splitline[1] == str(season)) and (splitline[5] == situation)):
+                
+                assist = float(splitline[33]) - float(splitline[34])
+                print(splitline[2],"had",splitline[33],"points with",splitline[34],"goals",assist,"assist")    
+            
+
 
 
 
 
 def main():
     Player_name = find_player()
-    #season = int(input("What season Stats do you want to see? "))
-    #situations = find_situation()
+    season = int(input("What season Stats do you want to see? "))
+    situations = find_situation()
     player_file = convert_name_into_file(Player_name)
-    
+    find_season(player_file,situations,season)
    
      
         
@@ -117,6 +128,6 @@ def main():
     
 
 
-    print_lines_last(player_file)
+    #print_lines_last(player_file)
 
 main()
