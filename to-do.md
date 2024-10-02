@@ -7,3 +7,5 @@ todo
 - see if i can add general game stats which would change the entire start of the main as  where instead of asking you for what player you are searing for it will ask if you want stats about the team  or the player stats and run whatever you input
 - find other ways to prevent errors or give user understandable error messages backs so that anyone could run the function.
 - find stats that match between players
+- add a plotter to see players stat histroy
+  
