@@ -1,4 +1,7 @@
 lastnames = r'data\lastnames.txt'
+import csv
+import plotter
+
 
 
 
@@ -24,6 +27,20 @@ def convert_name_into_file(playername):
     
     return player_file_name
 
+def points_graph(file,situation,playername):
+    
+    with open(file) as my_file:
+        plotter.init(playername,"Season","points")
+        plotter.new_series("Points total")
+        for line in my_file:
+            splitline = line.split(",")
+            
+            if (splitline[5] == situation):
+                plotter.add_data_point(float(splitline[33]))
+                
+            
+                 
+        plotter.plot()
 
 
 '''
@@ -120,8 +137,8 @@ def main():
     season = int(input("What season Stats do you want to see? "))
     situations = find_situation()
     player_file = convert_name_into_file(Player_name)
-    find_season(player_file,situations,season)
-   
+    #find_season(player_file,situations,season)
+    points_graph(player_file,situations,Player_name)
      
         
 
