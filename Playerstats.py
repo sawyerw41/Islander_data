@@ -1,6 +1,9 @@
-lastnames = r'data\lastnames.txt'
+
 import csv
 import plotter
+lastnames = r'data\lastnames.txt'
+single_season = "s"
+graph = "g"
 
 
 
@@ -53,11 +56,11 @@ def find_situation():
 
     situation = ''
     while True:
-        situation =input('\nWhat situation do you want to see stats for? \nType "info" for what types ')
+        situation =input('\nWhat situation do you want to see stats for? \nType "info" for what types: ')
         if situation == "info":
             #gives you the type of situations you can look for and re prompts you
-            print("\nall","5on5",'4on5','5on4','other',sep="\n")
-            situation =input('What situation do you want to see stats for? ')
+            print("\nall","5on5",'4on5','5on4','other\n',sep="\n")
+            situation =input('What situation do you want to see stats for: ')
         if situation != 'all' and (situation != '5on5') and (situation != '4on5') and (situation !='5on4') and (situation !='other'):
             #apears if you didnt put a valid input and starts the prompt over in order to prevent breaks
             print('You didnt enter in a valid situation please try again or press info to see your opions')
@@ -66,14 +69,14 @@ def find_situation():
             return situation
             break
 
-
+# makesn sure you enter a valid player name so that there is a file to get for them
 def find_player():
     
     while True:
         
         
         
-        player_name = input('Enter a players last name or type "player list" to get a list of names: ')
+        player_name = input('\nEnter a players last name or type "player list" to get a list of names: ')
         if player_name == 'player list':
             print_lines_last(lastnames)
             continue
@@ -99,9 +102,10 @@ def find_player():
 
 
 
-
+# finds out if the player is in the data base and returns false if they are not
+# works inside of find player
 def player_search(player_name):
-   
+   # turns the players name into a file
     with open(r'data\lastnames.txt') as my_file:
         word = player_name
         
@@ -116,35 +120,127 @@ def player_search(player_name):
     
   
     
+'''
+prints out the data if the user is looking for a season stats
+needs the players file and information from situation and season in order to identify the right line in the csv files
 
+
+'''
 def find_season(file,situation,season):
+    # fixes the ending based on what situation the stat is for
+    ending = ""
+    if situation == "all":
+        ending = 'during all situations.'
+    if situation == '5on5':
+        ending = "on 5on5 situtations."
+    if situation == '4on5':
+        ending = "on the penalty kill."
+    if situation == '5on4':
+        ending = "on the power play."
+    if situation == 'other':
+        ending = " during other situations"
+
+
+    
+    
+    
     with open(file) as my_file:
         for line in my_file:
             splitline = line.split(",")
             
             if ((splitline[1] == str(season)) and (splitline[5] == situation)):
-                
-                assist = float(splitline[33]) - float(splitline[34])
-                print(splitline[2],"had",splitline[33],"points with",splitline[34],"goals",assist,"assist")    
+                #changes the values into ints and makesn them more readable
+                assist = int(float(splitline[33]) - float(splitline[34]))
+                goals = int(float(splitline[34]))
+                points = int(float(splitline[33]))
+                player_name = splitline[2]
+                print('\n',player_name," had ",points," points with ",goals," goals ",assist," assist in the ",season,' season ',ending,sep="")    
             
+
+
+def print_functions():
+    print('\ng - points graph\ns - player season stats\nquit - exit the program')
+
+def is_season(playerfile):
+    while true 
+    is_season_helper(playerfile)
+
+def is_season_helper(playerfile):
+
+
+    with open(playerfile) as saeasonsearchfile:
+        
+       
+            season_input=str(input("\nEnter in a season you want to see stats for: "))    
+            is_a_seasson = False
+            for line in saeasonsearchfile:
+                splitline = line.split(",")
+                if splitline[1] == str(season_input):
+                    is_a_seasson = True
+            
+            
+            
+    return is_a_seasson,
+
+                    
+
 
 
 
 
 
 def main():
-    Player_name = find_player()
-    season = int(input("What season Stats do you want to see? "))
-    situations = find_situation()
-    player_file = convert_name_into_file(Player_name)
-    #find_season(player_file,situations,season)
-    points_graph(player_file,situations,Player_name)
+    
+    print('\nWelcome to the Islanders data base program \ntype "about" to see and about page \ntype "commands" to see what commands you can use')
+    '''
+    lets the user enter the commands that detrim what function they get
+    '''
+    while True:
+        cmd = input("\nEnter command: ")
+        if cmd == graph:
+            # gets the information for the player and what situation they want and plots their points in that situation on a graph
+            Player_name = find_player()
+            situations = find_situation()
+            player_file = convert_name_into_file(Player_name)
+            points_graph(player_file,situations,Player_name)
+        if cmd ==single_season:
+            # prints out a statline with points assist and goals if the user types in s
+            Player_name = find_player()
+            situations = find_situation()
+            player_file = convert_name_into_file(Player_name)
+            season = is_season(player_file)
+             
+            find_season(player_file,situations,season)
+        if cmd == 'quit':
+            break
+        if cmd == "commands":
+            print_functions()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+  
+    
+          
+    
+  
+
+
+        
+    
+    
      
         
 
     
 
 
-    #print_lines_last(player_file)
+ 
 
 main()
