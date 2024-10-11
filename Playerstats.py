@@ -162,16 +162,22 @@ def print_functions():
     print('\ng - points graph\ns - player season stats\nquit - exit the program')
 
 def is_season(playerfile):
-    while true 
-    is_season_helper(playerfile)
+    while True:
+        season_input=str(input("\nEnter in a season you want to see stats for: "))
+        if is_season_helper(season_input,playerfile) == True:
+            return season_input
+        else:
+            print("Invalid Season Try again")
 
-def is_season_helper(playerfile):
+
+
+def is_season_helper(season_input,playerfile):
 
 
     with open(playerfile) as saeasonsearchfile:
         
        
-            season_input=str(input("\nEnter in a season you want to see stats for: "))    
+                
             is_a_seasson = False
             for line in saeasonsearchfile:
                 splitline = line.split(",")
@@ -180,7 +186,7 @@ def is_season_helper(playerfile):
             
             
             
-    return is_a_seasson,
+    return is_a_seasson
 
                     
 
