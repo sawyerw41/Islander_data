@@ -42,7 +42,7 @@ def points_graph(file,situation,playername):
                 plotter.add_data_point(float(splitline[33]))
                 
             
-                 
+          
         plotter.plot()
 
 
@@ -163,9 +163,13 @@ def print_functions():
 
 def is_season(playerfile):
     while True:
-        season_input=str(input("\nEnter in a season you want to see stats for: "))
-        if is_season_helper(season_input,playerfile) == True:
+        season_input=str(input("\nEnter in a season you want to see stats for or type 'rookie' to see rookie season sats: "))
+        if season_input == 'rookie':
+            return find_rookie_season(playerfile) 
+        
+        elif is_season_helper(season_input,playerfile) == True:
             return season_input
+       
         else:
             print("Invalid Season Try again")
 
@@ -190,6 +194,16 @@ def is_season_helper(season_input,playerfile):
 
                     
 
+def find_rookie_season(player_file):
+    with open(player_file) as playfile:
+        next(playfile)
+        rookie_line = next(playfile)
+        rookie_line2 = rookie_line.split(",")
+        season = rookie_line2[1]
+
+    return season
+        
+        
 
 
 

@@ -124,6 +124,7 @@ def main():
     new_series("Line #1")
     add_data_point(100)
     add_data_point(25)
+         
     add_data_point(37)
     new_series("Line #2")
     add_data_point(75)
