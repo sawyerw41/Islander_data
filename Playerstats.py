@@ -4,6 +4,7 @@ import plotter
 lastnames = r'data\lastnames.txt'
 single_season = "s"
 graph = "g"
+rookie_season = "r"
 
 
 
@@ -159,7 +160,7 @@ def find_season(file,situation,season):
 
 
 def print_functions():
-    print('\ng - points graph\ns - player season stats\nquit - exit the program')
+    print('\ng - points graph\ns - player season stats\nquit - exit the program\nr - shows when that players rookie season was')
 
 def is_season(playerfile):
     while True:
@@ -207,7 +208,18 @@ def find_rookie_season(player_file):
 
     return season
         
+
+def tell_rookie_season(player_file,playername):
+    players_rookie_season = find_rookie_season(player_file)
+    with open(player_file) as file:
+        next(file)
+        name_line = next(file)
         
+        split_name_line = name_line.split(",")
+        
+        print(split_name_line[2] + "'s rookie season was "+ players_rookie_season)
+
+           
 
 
 
@@ -235,6 +247,11 @@ def main():
             season = is_season(player_file)
              
             find_season(player_file,situations,season)
+        if cmd == rookie_season:
+            Player_name = find_player()
+            player_file = convert_name_into_file(Player_name)
+            tell_rookie_season(player_file,Player_name)
+
         if cmd == 'quit':
             break
         if cmd == "commands":
