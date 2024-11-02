@@ -197,9 +197,13 @@ def is_season_helper(season_input,playerfile):
 def find_rookie_season(player_file):
     with open(player_file) as playfile:
         next(playfile)
-        rookie_line = next(playfile)
-        rookie_line2 = rookie_line.split(",")
-        season = rookie_line2[1]
+        for line in playfile:
+            stripped_line = line.split(",") 
+           
+            if int(stripped_line[6]) > 25:
+                season = stripped_line[1]
+                break
+       
 
     return season
         
